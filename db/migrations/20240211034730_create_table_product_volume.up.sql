@@ -1,4 +1,4 @@
-create table product_volume (
+create table product_volumes (
     id varchar not null ,
     product_id varchar not null,
     width int not null ,

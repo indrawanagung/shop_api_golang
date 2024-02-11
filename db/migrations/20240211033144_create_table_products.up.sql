@@ -8,6 +8,6 @@ create table products (
     updated_at varchar null,
     deleted_at timestamp null,
     constraint products_pk primary key (id),
-    constraint products_productCategory_fk foreign key (product_category_id) references product_category(id),
+    constraint products_productCategory_fk foreign key (product_category_id) references product_categories(id),
     constraint products_status_fk foreign key (status_id) references status(id)
 )
