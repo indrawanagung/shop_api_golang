@@ -1,0 +1,1 @@
+drop table if exists shopping_cart_items
