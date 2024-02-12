@@ -2,30 +2,28 @@ package main
 
 import (
 	"fmt"
+	"github.com/indrawanagung/shop_api_golang/db"
 	"github.com/indrawanagung/shop_api_golang/model/domain"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 	"testing"
 )
 
-func OpenConnection() *gorm.DB {
-	dsn := "host=localhost user=root password=secret dbname=shop port=5432 sslmode=disable TimeZone=Asia/Shanghai"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
-	})
-	if err != nil {
-		panic(err)
-	}
-	return db
-}
+//func OpenConnection() *gorm.DB {
+//	dsn := "host=localhost user=root password=secret dbname=shop port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+//	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+//		Logger: logger.Default.LogMode(logger.Info),
+//	})
+//	if err != nil {
+//		panic(err)
+//	}
+//	return db
+//}
 
-var db = OpenConnection()
+var connectionDB = db.OpenConnection()
 
 func TestGetCities(t *testing.T) {
 	var cities []domain.City
 
-	err := db.Find(&cities).Error
+	err := connectionDB.Find(&cities).Error
 	if err != nil {
 		panic(err)
 	}
@@ -35,7 +33,7 @@ func TestGetCities(t *testing.T) {
 func TestGetAdress(t *testing.T) {
 	var address domain.Address
 
-	err := db.Model(&domain.Address{}).Joins("City").First(&address).Error
+	err := connectionDB.Model(&domain.Address{}).Joins("City").First(&address).Error
 	if err != nil {
 		panic(err)
 	}
@@ -46,7 +44,7 @@ func TestGetAdress(t *testing.T) {
 func TestGetUsers(t *testing.T) {
 	var users domain.User
 
-	err := db.Model(&domain.User{}).Preload("Addresses.City").First(&users).Error
+	err := connectionDB.Model(&domain.User{}).Preload("Addresses.City").First(&users).Error
 	if err != nil {
 		panic(err)
 	}
@@ -56,7 +54,7 @@ func TestGetUsers(t *testing.T) {
 func TestGetStores(t *testing.T) {
 	var stores []domain.Store
 
-	err := db.Model(&domain.Store{}).Joins("User").Find(&stores).Error
+	err := connectionDB.Model(&domain.Store{}).Joins("User").Find(&stores).Error
 	if err != nil {
 		panic(err)
 	}
@@ -66,7 +64,7 @@ func TestGetStores(t *testing.T) {
 func TestGetWarehouses(t *testing.T) {
 	var warehouse domain.Warehouses
 
-	err := db.Model(&domain.Warehouses{}).Joins("Status.CategoryStatus").Joins("Address.City").Find(&warehouse).Error
+	err := connectionDB.Model(&domain.Warehouses{}).Joins("Status.CategoryStatus").Joins("Address.City").Find(&warehouse).Error
 	if err != nil {
 		panic(err)
 	}
@@ -77,7 +75,7 @@ func TestGetWarehouses(t *testing.T) {
 func TestGetCategoryStatus(t *testing.T) {
 	var categoryStatus domain.CategoryStatus
 
-	err := db.Model(&domain.CategoryStatus{}).Find(&categoryStatus).Error
+	err := connectionDB.Model(&domain.CategoryStatus{}).Find(&categoryStatus).Error
 	if err != nil {
 		panic(err)
 	}
@@ -87,7 +85,7 @@ func TestGetCategoryStatus(t *testing.T) {
 func TestGetStatus(t *testing.T) {
 	var status domain.Status
 
-	err := db.Model(&domain.Status{}).Joins("CategoryStatus").Find(&status).Error
+	err := connectionDB.Model(&domain.Status{}).Joins("CategoryStatus").Find(&status).Error
 	if err != nil {
 		panic(err)
 	}
@@ -97,7 +95,7 @@ func TestGetStatus(t *testing.T) {
 func TestGetProductCategory(t *testing.T) {
 	var productCategories []domain.ProductCategory
 
-	err := db.Model(&domain.ProductCategory{}).Find(&productCategories).Error
+	err := connectionDB.Model(&domain.ProductCategory{}).Find(&productCategories).Error
 	if err != nil {
 		panic(err)
 	}
