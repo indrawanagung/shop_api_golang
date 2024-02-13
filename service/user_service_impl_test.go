@@ -2,30 +2,17 @@ package service
 
 import (
 	"github.com/go-playground/validator/v10"
-	"github.com/gofiber/fiber/v2/log"
-	"github.com/indrawanagung/shop_api_golang/db"
 	"github.com/indrawanagung/shop_api_golang/model/web"
 	"github.com/indrawanagung/shop_api_golang/repository"
 	"github.com/indrawanagung/shop_api_golang/util"
 	"github.com/stretchr/testify/assert"
-	"gorm.io/gorm"
 	"testing"
 )
 
-func DB() *gorm.DB {
-	config, err := util.LoadConfig("../")
-	if err != nil {
-		log.Fatal(err)
-	}
-	conn := db.OpenConnection(config.DBSource)
-	return conn
-}
-
-var database = DB()
 var validate = validator.New()
 var userRepository = repository.NewUserRepository()
 var userService = NewUserService(database, userRepository, validate)
-
+var database = util.DatabaseTesting
 var userRequest web.UserCreateOrUpdateRequest = web.UserCreateOrUpdateRequest{
 	FullName:     "Golang",
 	EmailAddress: "golang@gmail.com",
