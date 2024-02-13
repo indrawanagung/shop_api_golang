@@ -58,3 +58,14 @@ func TestUserRepositoryImpl_Delete(t *testing.T) {
 	err := userRepository.Delete(conn, user.ID)
 	assert.Nil(t, err)
 }
+
+func TestUserRepositoryImpl_FindByEmail(t *testing.T) {
+	err := SaveOrUpdateUser(user)
+	assert.Nil(t, err)
+
+	isEmailExist := userRepository.FindByEmail(conn, user.EmailAddress)
+	assert.Equal(t, true, isEmailExist)
+
+	err = userRepository.Delete(conn, user.ID)
+	assert.Nil(t, err)
+}
