@@ -25,10 +25,15 @@ func main() {
 	database := db.OpenConnection(config.DBSource)
 
 	userRepository := repository.NewUserRepository()
-	userService := service.NewUserService(database, userRepository, validate)
-	userController := controller.NewUserController(userService)
+	cityRepository := repository.NewCityRepository()
 
-	app := route.New(userController)
+	userService := service.NewUserService(database, userRepository, validate)
+	cityService := service.NewCityService(cityRepository, database)
+
+	userController := controller.NewUserController(userService)
+	cityController := controller.NewCityController(cityService)
+
+	app := route.New(userController, cityController)
 	app.Use(logger.New(logger.Config{
 		Format:     "${cyan}[${time}] ${white}${pid} ${red}${status} ${blue}[${method}] ${white}${path}\n",
 		TimeFormat: "02-Jan-2006",

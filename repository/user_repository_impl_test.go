@@ -8,7 +8,7 @@ import (
 )
 
 var userRepository = NewUserRepository()
-
+var conn = DB()
 var user domain.User = domain.User{
 	ID:           util.GenerateUUID(),
 	FullName:     "Khamzat Chimaev",

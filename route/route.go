@@ -9,6 +9,7 @@ import (
 
 func New(
 	userController controller.UserControllerInterface,
+	cityController controller.CityControllerInterface,
 
 ) *fiber.App {
 
@@ -22,6 +23,9 @@ func New(
 	v1.Post("/users", userController.Save)
 	v1.Put("/users/:userID", userController.Update)
 	v1.Delete("/users/:userID", userController.Delete)
+
+	v1.Get("/cities", cityController.FindAll)
+	v1.Get("/cities/:cityID", cityController.FindByID)
 
 	// Error Handler
 

@@ -7,8 +7,6 @@ import (
 	"gorm.io/gorm"
 )
 
-var conn = DB()
-
 func DB() *gorm.DB {
 	config, err := util.LoadConfig("../")
 	if err != nil {
