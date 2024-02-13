@@ -114,6 +114,7 @@ func (s UserServiceImpl) Update(ID string, request web.UserCreateOrUpdateRequest
 func (s UserServiceImpl) FindByID(ID string) web.UserResponse {
 	err, user := s.UserRepository.FindByID(s.Database, ID)
 	if err != nil {
+		log.Error(err)
 		panic(exception.NewNotFoundError(fmt.Sprintf("user id %s is not found", ID)))
 	}
 
@@ -123,6 +124,7 @@ func (s UserServiceImpl) FindByID(ID string) web.UserResponse {
 func (s UserServiceImpl) Delete(ID string) {
 	err, _ := s.UserRepository.FindByID(s.Database, ID)
 	if err != nil {
+		log.Error(err)
 		panic(exception.NewNotFoundError(fmt.Sprintf("user id %s is not found", ID)))
 	}
 

@@ -4,6 +4,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/indrawanagung/shop_api_golang/model/web"
 	"github.com/indrawanagung/shop_api_golang/repository"
+	"github.com/indrawanagung/shop_api_golang/util"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -11,7 +12,7 @@ import (
 var validate = validator.New()
 var userRepository = repository.NewUserRepository()
 var userService = NewUserService(database, userRepository, validate)
-var database = DB()
+var database = util.DBTest("../")
 var userRequest web.UserCreateOrUpdateRequest = web.UserCreateOrUpdateRequest{
 	FullName:     "Golang",
 	EmailAddress: "golang@gmail.com",

@@ -39,6 +39,7 @@ func main() {
 		TimeFormat: "02-Jan-2006",
 		TimeZone:   "UTC",
 	}))
+
 	f, _ := os.OpenFile("test.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	log.SetOutput(f)
 	log.Info("server running on port 3000")

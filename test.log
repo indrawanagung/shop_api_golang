@@ -16,3 +16,18 @@ Key: 'UserCreateOrUpdateRequest.EmailAddress' Error:Field validation for 'EmailA
 2024/02/13 10:03:38.082183 main.go:39: [Info] server running on port 3000
 2024/02/13 10:06:09.402010 main.go:39: [Info] server running on port 3000
 2024/02/13 17:24:10.513201 main.go:44: [Info] server running on port 3000
+2024/02/13 21:02:39.130518 main.go:44: [Info] server running on port 3000
+2024/02/13 21:05:16.942098 main.go:44: [Info] server running on port 3000
+2024/02/13 21:05:24.288076 user_service_impl.go:117: [Fatal] record not found
+2024/02/13 21:07:14.870909 main.go:44: [Info] server running on port 3000
+2024/02/13 21:07:20.228946 user_service_impl.go:117: [Error] record not found
+2024/02/13 21:07:40.096910 main.go:44: [Info] server running on port 3000
+2024/02/13 21:07:45.241136 user_service_impl.go:117: [Panic] record not found
+2024/02/13 21:07:47.586670 user_service_impl.go:117: [Panic] record not found
+2024/02/13 21:17:41.597207 main.go:45: [Info] server running on port 3000
+2024/02/13 21:18:00.789199 user_service_impl.go:117: [Fatal] record not found
+2024/02/13 21:25:07.269689 main.go:45: [Info] server running on port 3000
+2024/02/13 21:29:26.426486 main.go:45: [Info] server running on port 3000
+2024/02/13 21:29:32.103177 user_service_impl.go:117: [Error] record not found
+2024/02/13 21:29:33.902222 user_service_impl.go:117: [Error] record not found
+2024/02/13 21:29:35.689127 user_service_impl.go:117: [Error] record not found

@@ -26,7 +26,8 @@ func (a AuthServiceImpl) Login(request web.LoginRequest) interface{} {
 	// Generate encoded token and send it as response.
 	t, err := token.SignedString([]byte(viper.GetString("SECRET_KEY")))
 	if err != nil {
-		log.Fatal(err)
+		log.Panic(err)
+		panic(err)
 	}
 	return t
 }

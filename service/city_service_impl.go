@@ -24,7 +24,8 @@ func NewCityService(cityRepository repository.CityRepositoryInterface, db *gorm.
 func (c CityServiceImpl) FindAll() []domain.City {
 	err, cities := c.CityRepository.FindAll(c.DB)
 	if err != nil {
-		log.Fatal(err)
+		log.Panic(err)
+		panic(err)
 	}
 	return cities
 }

@@ -8,7 +8,7 @@ import (
 )
 
 var userRepository = NewUserRepository()
-var conn = DB()
+var conn = util.DBTest("../")
 var user domain.User = domain.User{
 	ID:           util.GenerateUUID(),
 	FullName:     "Khamzat Chimaev",
@@ -22,7 +22,7 @@ var user domain.User = domain.User{
 }
 
 func SaveOrUpdateUser(user domain.User) error {
-	return userRepository.SaveOrUpdate(DB(), user)
+	return userRepository.SaveOrUpdate(conn, user)
 }
 
 func TestUserRepositoryImpl_FindByID(t *testing.T) {
