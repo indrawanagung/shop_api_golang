@@ -1,12 +1,9 @@
 package repository
 
 import (
-	"github.com/gofiber/fiber/v2/log"
-	"github.com/indrawanagung/shop_api_golang/db"
 	"github.com/indrawanagung/shop_api_golang/model/domain"
 	"github.com/indrawanagung/shop_api_golang/util"
 	"github.com/stretchr/testify/assert"
-	"gorm.io/gorm"
 	"testing"
 )
 
@@ -22,17 +19,6 @@ var user domain.User = domain.User{
 		CreatedAt: util.GetUnixTimestamp(),
 	},
 	Addresses: nil,
-}
-
-var conn = DB()
-
-func DB() *gorm.DB {
-	config, err := util.LoadConfig("../")
-	if err != nil {
-		log.Fatal(err)
-	}
-	conn := db.OpenConnection(config.DBSource)
-	return conn
 }
 
 func SaveOrUpdateUser(user domain.User) error {
