@@ -8,14 +8,14 @@ import (
 var cityRepository = NewCityRepository()
 
 func TestCityRepositoryImpl_FindAll(t *testing.T) {
-	err, cities := cityRepository.FindAll(conn)
+	err, cities := cityRepository.FindAll(dbTest)
 	assert.Nil(t, err)
 	assert.NotEqual(t, 0, len(cities))
 }
 
 func TestCityRepositoryImpl_FindByID(t *testing.T) {
 	cityID := "1"
-	err, city := cityRepository.FindByID(conn, cityID)
+	err, city := cityRepository.FindByID(dbTest, cityID)
 	assert.Nil(t, err)
 	assert.NotNil(t, city)
 	assert.Equal(t, "makassar", city.City)

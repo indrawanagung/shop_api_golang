@@ -8,7 +8,7 @@ import (
 )
 
 var userRepository = NewUserRepository()
-var conn = util.DBTest("../")
+var dbTest = util.DBTest("../")
 var user domain.User = domain.User{
 	ID:           util.GenerateUUID(),
 	FullName:     "Khamzat Chimaev",
@@ -22,16 +22,16 @@ var user domain.User = domain.User{
 }
 
 func SaveOrUpdateUser(user domain.User) error {
-	return userRepository.SaveOrUpdate(conn, user)
+	return userRepository.SaveOrUpdate(dbTest, user)
 }
 
 func TestUserRepositoryImpl_FindByID(t *testing.T) {
-	//util.TruncateDB(conn)
+	//util.TruncateDB(dbTest)
 
 	err := SaveOrUpdateUser(user)
 	assert.Nil(t, err)
 
-	err, userResponse := userRepository.FindByID(conn, user.ID)
+	err, userResponse := userRepository.FindByID(dbTest, user.ID)
 	assert.Equal(t, user.ID, userResponse.ID)
 	assert.Equal(t, user.Password, userResponse.Password)
 	assert.Equal(t, user.PhoneNumber, userResponse.PhoneNumber)
@@ -41,7 +41,7 @@ func TestUserRepositoryImpl_FindByID(t *testing.T) {
 }
 
 func TestUserRepositoryImpl_Delete(t *testing.T) {
-	err := userRepository.Delete(conn, user.ID)
+	err := userRepository.Delete(dbTest, user.ID)
 	assert.Nil(t, err)
 }
 
@@ -49,9 +49,9 @@ func TestUserRepositoryImpl_FindByEmail(t *testing.T) {
 	err := SaveOrUpdateUser(user)
 	assert.Nil(t, err)
 
-	isEmailExist := userRepository.FindByEmail(conn, user.EmailAddress)
+	isEmailExist := userRepository.FindByEmail(dbTest, user.EmailAddress)
 	assert.Equal(t, true, isEmailExist)
 
-	err = userRepository.Delete(conn, user.ID)
+	err = userRepository.Delete(dbTest, user.ID)
 	assert.Nil(t, err)
 }
