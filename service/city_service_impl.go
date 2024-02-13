@@ -32,7 +32,7 @@ func (c CityServiceImpl) FindAll() []domain.City {
 func (c CityServiceImpl) FindByID(cityID string) domain.City {
 	err, city := c.CityRepository.FindByID(c.DB, cityID)
 	if err != nil {
-		panic(exception.NewNotFoundError(fmt.Sprintf("user id %s is not found", cityID)))
+		panic(exception.NewNotFoundError(fmt.Sprintf("city id %s is not found", cityID)))
 	}
 	return city
 }
