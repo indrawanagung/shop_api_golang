@@ -10,7 +10,7 @@ var cityRepository = NewCityRepository()
 func TestCityRepositoryImpl_FindAll(t *testing.T) {
 	err, cities := cityRepository.FindAll(conn)
 	assert.Nil(t, err)
-	assert.Equal(t, 0, len(cities))
+	assert.NotEqual(t, 0, len(cities))
 }
 
 func TestCityRepositoryImpl_FindByID(t *testing.T) {
@@ -18,4 +18,5 @@ func TestCityRepositoryImpl_FindByID(t *testing.T) {
 	err, city := cityRepository.FindByID(conn, cityID)
 	assert.Nil(t, err)
 	assert.NotNil(t, city)
+	assert.Equal(t, "makassar", city.City)
 }

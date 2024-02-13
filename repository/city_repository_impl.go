@@ -13,11 +13,14 @@ func NewCityRepository() CityRepositoryInterface {
 }
 
 func (c CityRepositoryImpl) FindAll(db *gorm.DB) (error, []domain.City) {
-	//TODO implement me
-	panic("implement me")
+	var cities []domain.City
+	err := db.Find(&cities).Error
+	return err, cities
+
 }
 
 func (c CityRepositoryImpl) FindByID(db *gorm.DB, ID string) (error, domain.City) {
-	//TODO implement me
-	panic("implement me")
+	var city domain.City
+	err := db.Take(&city, "id = ?", ID).Error
+	return err, city
 }
