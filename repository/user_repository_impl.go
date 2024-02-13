@@ -26,3 +26,11 @@ func (u UserRepositoryImpl) Delete(tx *gorm.DB, userID string) error {
 	user := domain.User{ID: userID}
 	return tx.Delete(&user).Error
 }
+
+func (u UserRepositoryImpl) FindByEmail(tx *gorm.DB, email string) bool {
+	err := tx.Take(&domain.User{}, "email_address = ? ", email).Error
+	if err != nil {
+		return false
+	}
+	return true
+}

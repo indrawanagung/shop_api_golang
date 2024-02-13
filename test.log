@@ -1,0 +1,17 @@
+2024/02/13 07:09:11.558245 main.go:39: [Info] server running on port 3000
+2024/02/13 09:46:56.366685 main.go:39: [Info] server running on port 3000
+2024/02/13 09:49:54.137417 user_service_impl.go:34: [Error] Key: 'UserCreateOrUpdateRequest.FullName' Error:Field validation for 'FullName' failed on the 'required' tag
+Key: 'UserCreateOrUpdateRequest.EmailAddress' Error:Field validation for 'EmailAddress' failed on the 'required' tag
+2024/02/13 09:50:27.586551 user_service_impl.go:34: [Error] Key: 'UserCreateOrUpdateRequest.FullName' Error:Field validation for 'FullName' failed on the 'required' tag
+Key: 'UserCreateOrUpdateRequest.EmailAddress' Error:Field validation for 'EmailAddress' failed on the 'required' tag
+2024/02/13 09:50:37.658925 main.go:39: [Info] server running on port 3000
+2024/02/13 09:52:03.115523 main.go:39: [Info] server running on port 3000
+2024/02/13 09:53:28.677326 user_service_impl.go:83: [Error] Key: 'UserCreateOrUpdateRequest.FullName' Error:Field validation for 'FullName' failed on the 'min' tag
+2024/02/13 09:59:29.297078 main.go:39: [Info] server running on port 3000
+2024/02/13 10:01:16.437962 main.go:39: [Info] server running on port 3000
+2024/02/13 10:01:25.901350 user_service_impl.go:70: [Fatal] record not found
+2024/02/13 10:01:41.917938 main.go:39: [Info] server running on port 3000
+2024/02/13 10:01:47.982308 user_service_impl.go:70: [Fatal] record not found
+2024/02/13 10:02:45.775849 main.go:39: [Info] server running on port 3000
+2024/02/13 10:03:38.082183 main.go:39: [Info] server running on port 3000
+2024/02/13 10:06:09.402010 main.go:39: [Info] server running on port 3000

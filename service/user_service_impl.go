@@ -41,6 +41,11 @@ func (s UserServiceImpl) Save(request web.UserCreateOrUpdateRequest) string {
 	}
 
 	id := util.GenerateUUID()
+
+	isEmailExist := s.UserRepository.FindByEmail(s.Database, request.EmailAddress)
+	if isEmailExist {
+		panic(exception.NewBadRequestError("email address has been already exist"))
+	}
 	err = s.UserRepository.SaveOrUpdate(s.Database, domain.User{
 		ID:           id,
 		FullName:     request.FullName,
@@ -62,7 +67,7 @@ func (s UserServiceImpl) Update(ID string, request web.UserCreateOrUpdateRequest
 
 	err, user := s.UserRepository.FindByID(s.Database, ID)
 	if err != nil {
-		log.Fatal(err)
+		panic(exception.NewNotFoundError(fmt.Sprintf("user id %s is not found", ID)))
 	}
 
 	var passwordHash string
@@ -84,6 +89,11 @@ func (s UserServiceImpl) Update(ID string, request web.UserCreateOrUpdateRequest
 		panic(exception.NewBadRequestError(errTrans.Error()))
 	}
 
+	isEmailExist := s.UserRepository.FindByEmail(s.Database, request.EmailAddress)
+	if isEmailExist && request.EmailAddress != user.EmailAddress {
+		panic(exception.NewBadRequestError("email address has been already exist"))
+	}
+
 	err = s.UserRepository.SaveOrUpdate(s.Database, domain.User{
 		ID:           ID,
 		FullName:     request.FullName,
@@ -91,6 +101,7 @@ func (s UserServiceImpl) Update(ID string, request web.UserCreateOrUpdateRequest
 		PhoneNumber:  request.PhoneNumber,
 		Password:     passwordHash,
 		Timestamp: domain.Timestamp{
+			CreatedAt: user.Timestamp.CreatedAt,
 			UpdatedAt: util.GetUnixTimestamp(),
 		},
 	})
