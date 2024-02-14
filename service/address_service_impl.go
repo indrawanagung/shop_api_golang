@@ -25,18 +25,18 @@ func NewAddressService(database *gorm.DB, addressRepository repository.AddressRe
 	}
 }
 
-func (s AddressServiceImpl) FindAllByUserID(userID string) []domain.Address {
-	return s.AddressRepository.FindAllByUserID(s.Database, userID)
+func (s AddressServiceImpl) FindAllByUserID(userID string) []web.AddressResponse {
+	addresses := s.AddressRepository.FindAllByUserID(s.Database, userID)
+	return web.ToAddressResponses(addresses)
 }
 
-func (s AddressServiceImpl) FindByID(addressID string) domain.Address {
+func (s AddressServiceImpl) FindByID(addressID string) web.AddressResponse {
 	err, address := s.AddressRepository.FindByID(s.Database, addressID)
 	if err != nil {
 		log.Error(err)
 		panic(exception.NewNotFoundError(err.Error()))
 	}
-
-	return address
+	return web.ToAddressResponse(address)
 }
 
 func (s AddressServiceImpl) Save(addressRequest web.AddressCreateOrUpdateRequest) string {

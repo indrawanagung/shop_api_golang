@@ -17,14 +17,14 @@ func NewAddressRepository() AddressRepositoryInterface {
 
 func (a AddressRepositoryImpl) FindAllByUserID(db *gorm.DB, userID string) []domain.Address {
 	var addresses []domain.Address
-	err := db.Where("user_id = ?", userID).Find(&addresses).Error
+	err := db.Where("user_id = ?", userID).Joins("City").Find(&addresses).Error
 	fmt.Println(err)
 	return addresses
 }
 
 func (a AddressRepositoryImpl) FindByID(db *gorm.DB, addressID string) (error, domain.Address) {
 	var address domain.Address
-	err := db.Take(&address, "id = ? ", addressID).Error
+	err := db.Joins("City").First(&address, "address.id = ?", addressID).Error
 	if err != nil {
 		if err.Error() != "record not found" {
 			log.Error(err)
