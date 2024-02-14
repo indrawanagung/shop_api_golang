@@ -10,7 +10,7 @@ import (
 var addressRepository = repository.NewAddressRepository()
 var addressService = NewAddressService(database, addressRepository, validate)
 
-var addressRequest = web.AddressRequest{
+var addressRequest = web.AddressCreateOrUpdateRequest{
 	Name:       "alamat 2",
 	CityID:     "1",
 	PostalCode: "900",
@@ -45,7 +45,6 @@ func TestAddressServiceImpl_FindByID(t *testing.T) {
 	address := addressService.FindByID(id)
 	assert.Equal(t, addressRequest.Name, address.Name)
 	assert.Equal(t, addressRequest.PostalCode, address.PostalCode)
-	assert.Equal(t, addressRequest.UserID, address.UserID)
 }
 
 func TestAddressServiceImpl_Update(t *testing.T) {
