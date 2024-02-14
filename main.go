@@ -26,14 +26,17 @@ func main() {
 
 	userRepository := repository.NewUserRepository()
 	cityRepository := repository.NewCityRepository()
+	addressRepository := repository.NewAddressRepository()
 
 	userService := service.NewUserService(database, userRepository, validate)
 	cityService := service.NewCityService(cityRepository, database)
+	addressService := service.NewAddressService(database, addressRepository, validate)
 
 	userController := controller.NewUserController(userService)
 	cityController := controller.NewCityController(cityService)
+	addressController := controller.NewAddressController(addressService)
 
-	app := route.New(userController, cityController)
+	app := route.New(userController, cityController, addressController)
 	app.Use(logger.New(logger.Config{
 		Format:     "${cyan}[${time}] ${white}${pid} ${red}${status} ${blue}[${method}] ${white}${path}\n",
 		TimeFormat: "02-Jan-2006",

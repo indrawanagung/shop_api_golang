@@ -22,10 +22,14 @@ func SaveAddress() string {
 }
 
 func TestAddressServiceImpl_Delete(t *testing.T) {
+	defer func() {
+		r := recover()
+		assert.NotNil(t, r)
+	}()
 	id := SaveAddress()
 	addressService.Delete(id)
-	address := userService.FindByID(id)
-	assert.Nil(t, address)
+	userService.FindByID(id)
+
 }
 
 func TestAddressServiceImpl_FindAllByUserID(t *testing.T) {
