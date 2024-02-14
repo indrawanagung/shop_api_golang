@@ -31,7 +31,7 @@ func New(
 	v1.Get("/address/:addressID", addressController.FindByID)
 	v1.Post("/address", addressController.Save)
 	v1.Put("/address/:addressID", addressController.Update)
-	v1.Delete("/address/:addressID", addressController.Update)
+	v1.Delete("/address/:addressID", addressController.Delete)
 
 	// Error Handler
 
