@@ -40,6 +40,13 @@ func (s AddressServiceImpl) FindByID(addressID string) web.AddressResponse {
 }
 
 func (s AddressServiceImpl) Save(addressRequest web.AddressCreateOrUpdateRequest) string {
+	err := s.Validate.Struct(addressRequest)
+	errTrans := util.TranslateErroValidation(s.Validate, err)
+	if err != nil {
+		log.Error(err)
+		panic(exception.NewBadRequestError(errTrans.Error()))
+	}
+
 	address := domain.Address{
 		ID:         util.GenerateUUID(),
 		Name:       addressRequest.Name,

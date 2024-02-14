@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/indrawanagung/shop_api_golang/exception"
 	"github.com/indrawanagung/shop_api_golang/model/web"
 	"github.com/indrawanagung/shop_api_golang/service"
@@ -17,8 +18,9 @@ func NewAddressController(addressService service.AddressServiceInterface) Addres
 }
 
 func (c AddressControllerImpl) FindAllByUserID(ctx *fiber.Ctx) error {
-	userID := ctx.Params("userID")
-
+	user := ctx.Locals("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+	userID := claims["id"].(string)
 	addressesResponse := c.AddressService.FindAllByUserID(userID)
 	webResponse := web.WebResponse{
 		Header: util.HeaderResponseSuccessfully(),
@@ -30,7 +32,6 @@ func (c AddressControllerImpl) FindAllByUserID(ctx *fiber.Ctx) error {
 
 func (c AddressControllerImpl) FindByID(ctx *fiber.Ctx) error {
 	addressID := ctx.Params("addressID")
-
 	addressResponse := c.AddressService.FindByID(addressID)
 	webResponse := web.WebResponse{
 		Header: util.HeaderResponseSuccessfully(),

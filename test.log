@@ -34,3 +34,18 @@ Key: 'UserCreateOrUpdateRequest.EmailAddress' Error:Field validation for 'EmailA
 2024/02/14 10:33:27.522821 main.go:48: [Info] server running on port 3000
 2024/02/14 10:36:55.402126 main.go:48: [Info] server running on port 3000
 2024/02/14 10:39:22.493394 main.go:48: [Info] server running on port 3000
+2024/02/14 10:46:06.950317 main.go:48: [Info] server running on port 3000
+2024/02/14 10:47:08.589209 main.go:48: [Info] server running on port 3000
+2024/02/14 10:47:42.538607 main.go:48: [Info] server running on port 3000
+2024/02/14 10:48:06.156280 main.go:48: [Info] server running on port 3000
+2024/02/14 10:49:17.823624 main.go:48: [Info] server running on port 3000
+2024/02/14 11:00:31.616492 main.go:48: [Info] server running on port 3000
+2024/02/14 11:00:45.156541 address_service_impl.go:36: [Error] address id 10 is not found
+2024/02/14 13:05:53.032389 main.go:48: [Info] server running on port 3000
+2024/02/14 13:06:08.077076 address_service_impl.go:36: [Error] address id abf55811-5758-4c67-beb2-d1f043005fab is not found
+2024/02/14 19:27:23.665676 main.go:48: [Info] server running on port 3000
+2024/02/14 19:35:38.288367 main.go:50: [Info] server running on port 3000
+2024/02/14 19:39:02.193136 address_service_impl.go:36: [Error] address id abf55811-5758-4c67-beb2-d1f043005fab is not found
+2024/02/14 19:40:02.925465 main.go:50: [Info] server running on port 3000
+2024/02/14 19:40:40.740873 main.go:50: [Info] server running on port 3000
+2024/02/14 20:27:19.405650 main.go:50: [Info] server running on port 3000

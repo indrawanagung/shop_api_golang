@@ -31,12 +31,14 @@ func main() {
 	userService := service.NewUserService(database, userRepository, validate)
 	cityService := service.NewCityService(cityRepository, database)
 	addressService := service.NewAddressService(database, addressRepository, validate)
+	authService := service.NewAuthService(userRepository, database, validate)
 
 	userController := controller.NewUserController(userService)
 	cityController := controller.NewCityController(cityService)
 	addressController := controller.NewAddressController(addressService)
+	authController := controller.NewAuthController(authService)
 
-	app := route.New(userController, cityController, addressController)
+	app := route.New(userController, cityController, addressController, authController)
 	app.Use(logger.New(logger.Config{
 		Format:     "${cyan}[${time}] ${white}${pid} ${red}${status} ${blue}[${method}] ${white}${path}\n",
 		TimeFormat: "02-Jan-2006",

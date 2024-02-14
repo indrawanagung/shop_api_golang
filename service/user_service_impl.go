@@ -42,8 +42,9 @@ func (s UserServiceImpl) Save(request web.UserCreateOrUpdateRequest) string {
 
 	id := util.GenerateUUID()
 
-	isEmailExist := s.UserRepository.FindByEmail(s.Database, request.EmailAddress)
-	if isEmailExist {
+	err, _ = s.UserRepository.FindByEmail(s.Database, request.EmailAddress)
+
+	if err == nil {
 		panic(exception.NewBadRequestError("email address has been already exist"))
 	}
 	err = s.UserRepository.SaveOrUpdate(s.Database, domain.User{
@@ -89,8 +90,9 @@ func (s UserServiceImpl) Update(ID string, request web.UserCreateOrUpdateRequest
 		panic(exception.NewBadRequestError(errTrans.Error()))
 	}
 
-	isEmailExist := s.UserRepository.FindByEmail(s.Database, request.EmailAddress)
-	if isEmailExist && request.EmailAddress != user.EmailAddress {
+	err, _ = s.UserRepository.FindByEmail(s.Database, request.EmailAddress)
+
+	if err == nil && request.EmailAddress != user.EmailAddress {
 		panic(exception.NewBadRequestError("email address has been already exist"))
 	}
 

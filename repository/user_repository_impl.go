@@ -1,6 +1,9 @@
 package repository
 
 import (
+	"errors"
+	"fmt"
+	"github.com/gofiber/fiber/v2/log"
 	"github.com/indrawanagung/shop_api_golang/model/domain"
 	"gorm.io/gorm"
 )
@@ -27,10 +30,16 @@ func (u UserRepositoryImpl) Delete(tx *gorm.DB, userID string) error {
 	return tx.Delete(&user).Error
 }
 
-func (u UserRepositoryImpl) FindByEmail(tx *gorm.DB, email string) bool {
-	err := tx.Take(&domain.User{}, "email_address = ? ", email).Error
+func (u UserRepositoryImpl) FindByEmail(tx *gorm.DB, email string) (error, domain.User) {
+	var user domain.User
+	err := tx.Take(&user, "email_address = ? ", email).Error
 	if err != nil {
-		return false
+		if err.Error() != "record not found" {
+			log.Error(err)
+			panic(err)
+		}
+		return errors.New(fmt.Sprintf("user email %s is not found", email)), user
 	}
-	return true
+
+	return nil, user
 }
